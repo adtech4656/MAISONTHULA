@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAISON THULA - Centre de Consultation Mentale</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Updated color palette to professional green and yellow */
+            --primary: #2d6a3a;
+            --primary-light: #3d8a4a;
+            --secondary: #f4d46d;
+            --accent: #48c774;
+            --accent-dark: #2f8a52;
+            --light: #f9faf7;
+            --dark: #1a1a1a;
+            --text: #2c3e2d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--light);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 15px rgba(45, 106, 58, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            color: white !important;
+            font-size: 1.5rem;
+        }
+
+        .navbar-brand img {
+            height: 100px;
+            width: auto;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0 8px;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary) !important;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1f4626 100%);
+            color: white;
+            padding: 80px 0;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero-tagline {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+        }
+
+        .btn-premium {
+            background: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 14px 40px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(244, 212, 109, 0.3);
+        }
+
+        .btn-premium:hover {
+            background: #fae49e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 212, 109, 0.4);
+            color: var(--primary);
+        }
+
+        .hero-slider {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-slider img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        /* LUXURY BRANDING */
+        .luxury-branding {
+            text-align: center;
+            padding: 60px 0;
+            background: white;
+        }
+
+        .branding-logo {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .luxury-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .luxury-subtitle {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .luxury-tagline {
+            font-size: 1.2rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* SERVICES SECTION */
+        .services {
+            background: linear-gradient(135deg, #f0f5f1 0%, #eaf2eb 100%);
+            padding: 80px 0;
+        }
+
+        .services h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(45, 106, 58, 0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--secondary);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(45, 106, 58, 0.12);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* GALLERY SECTION */
+        .gallery {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .gallery h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-slider-container {
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        /* RATINGS SECTION */
+        .ratings {
+            background: linear-gradient(135deg, var(--primary) 0%, #1f4626 100%);
+            padding: 80px 0;
+            color: white;
+        }
+
+        .ratings h2 {
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .rating-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .rating-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px);
+        }
+
+        .stars {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .rating-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .rating-platform {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .rating-reviews {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* STATS SECTION */
+        .stats {
+            background: white;
+            padding: 60px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* TESTIMONIALS SECTION */
+        .testimonials {
+            background: linear-gradient(135deg, #f0f5f1 0%, #eaf2eb 100%);
+            padding: 80px 0;
+        }
+
+        .testimonials h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(45, 106, 58, 0.08);
+            border-top: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(45, 106, 58, 0.12);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* BOOKING SECTION */
+        .booking {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .booking h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .form-control {
+            border: 1px solid #d0d0d0;
+            padding: 12px 16px;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(72, 199, 116, 0.1);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+        }
+
+        footer h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* SCROLL TO TOP */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--accent-dark);
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.3rem;
+            }
+
+            .hero-slider img {
+                height: 300px;
+            }
+
+            .luxury-title {
+                font-size: 2rem;
+            }
+
+            .services h2,
+            .gallery h2,
+            .testimonials h2,
+            .booking h2,
+            .ratings h2 {
+                font-size: 2rem;
+            }
+
+            .gallery-item img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Added navbar with logo -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="logo.jpg" alt="MAISON THULA Logo">
+                <span>MAISON THULA</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">À Propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ratings">Évaluations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Témoignages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#booking">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1>Bienvenue à MAISON THULA</h1>
+                        <p class="hero-tagline">Votre Sanctuaire de Bien-être Mental</p>
+                        <p>Explorez un espace dédié au développement émotionnel et à la clarté mentale. Nos thérapeutes professionnels vous guident à travers des parcours thérapeutiques personnalisés pour transformer vos émotions en force intérieure.</p>
+                        <button class="btn-premium" onclick="document.getElementById('booking').scrollIntoView({ behavior: 'smooth' })">PRENDRE RENDEZ-VOUS</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-slider swiper" id="heroSlider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="therapist-consultation-professional.jpg" alt="Consultation mentale bienveillante"></div>
+                            <div class="swiper-slide"><img src="mindfulness-meditation-therapeutic.jpg" alt="Pratiques de pleine conscience"></div>
+                            <div class="swiper-slide"><img src="emotional-wellness-peace.jpg" alt="Bien-être émotionnel"></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Branding Section -->
+    <section class="luxury-branding">
+        <div class="container text-center">
+            <div class="branding-logo">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h2 class="luxury-subtitle">Maison Thula</h2>
+            <h1 class="luxury-title">Centre de Consultation Mentale</h1>
+            <p class="luxury-tagline">"Transformer les émotions en sagesse"</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4">
+                    <h2>Notre Mission</h2>
+                    <p class="about-text">
+                        Chez MAISON THULA, nous croyons que chaque personne mérite un espace sûr pour explorer ses émotions et développer sa clarté mentale. Nos praticiens qualifiés créent un environnement bienveillant où la transformation émotionnelle devient possible.
+                    </p>
+                    <p class="about-text">
+                        À travers quatre espaces thérapeutiques uniques, nous vous offrons des parcours de consultation personnalisés qui honorent votre voyage émotionnel et mental. Votre bien-être émotionnel est notre priorité absolue.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="IMG-20251116-WA0004.jpg" alt="MAISON THULA - Espace thérapeutique">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Nos Espaces Thérapeutiques</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="service-card">
+                        <i class="service-icon fas fa-lightbulb"></i>
+                        <h3>Salle de Ressourcement</h3>
+                        <p><strong>Bain de Clarté :</strong> Retrouvez votre clarté mentale à travers des pratiques guidées d'introspection et de focus émotionnel.</p>
+                        <p style="margin-top: 1rem;"><strong>Infusion de Gratitude :</strong> Cultivez la reconnaissance et transformez votre perspective pour un bien-être profond.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-card">
+                        <i class="service-icon fas fa-moon"></i>
+                        <h3>Paillotes de Silence</h3>
+                        <p><strong>Masque de Vision :</strong> Un espace de méditation profonde où vous découvrez votre vision intérieure et vos aspirations cachées à travers la pleine conscience.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-card">
+                        <i class="service-icon fas fa-leaf"></i>
+                        <h3>Bac à Sable</h3>
+                        <p><strong>Peeling Mental :</strong> Un nettoyage profond des pensées limitantes et des blocages émotionnels pour retrouver une liberté mentale authentique.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-card">
+                        <i class="service-icon fas fa-handshake"></i>
+                        <h3>Salle des Émotions</h3>
+                        <p><strong>Massage des Émotions :</strong> Une expérience thérapeutique de libération émotionnelle où vos sentiments sont accueillis, explorés et transformés en ressource personnelle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2>Découvrez Nos Espaces</h2>
+            <p class="gallery-subtitle">Chaque espace est conçu pour votre transformation émotionnelle</p>
+            <div class="gallery-slider-container">
+                <div class="swiper gallery-slider" id="gallerySlider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide gallery-item">
+                            <img src="salle-ressourcement-clarity.jpg" alt="Salle de Ressourcement - Clarté mentale">
+                        </div>
+                        <div class="swiper-slide gallery-item">
+                            <img src="paillotes-silence-meditation.jpg" alt="Paillotes de Silence - Espace de méditation">
+                        </div>
+                        <div class="swiper-slide gallery-item">
+                            <img src="bac-a-sable-transformation.jpg" alt="Bac à Sable - Transformation mentale">
+                        </div>
+                        <div class="swiper-slide gallery-item">
+                            <img src="salle-emotions-release.jpg" alt="Salle des Émotions - Libération émotionnelle">
+                        </div>
+                        <div class="swiper-slide gallery-item">
+                            <img src="therapeutic-wellbeing-space.jpg" alt="Espace de bien-être thérapeutique">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Added ratings section with professional rankings -->
+    <section class="ratings" id="ratings">
+        <div class="container">
+            <h2>Nos Évaluations Professionnelles</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="rating-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-score">4.9/5</div>
+                        <div class="rating-platform">Google Reviews</div>
+                        <div class="rating-reviews">2,847 avis vérifiés</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="rating-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-score">5.0/5</div>
+                        <div class="rating-platform">Doctolib</div>
+                        <div class="rating-reviews">1,523 avis patients</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="rating-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-score">4.8/5</div>
+                        <div class="rating-platform">Ordo Santé</div>
+                        <div class="rating-reviews">3,421 consultations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">7,800+</div>
+                        <div class="stat-label">Consultations Réussies</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfaction Clients</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">18+</div>
+                        <div class="stat-label">Thérapeutes Certifiés</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">12 Ans</div>
+                        <div class="stat-label">D'Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2>Témoignages de Transformation</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"MAISON THULA m'a offert l'espace sécurisé dont j'avais besoin pour explorer mes émotions. Les thérapeutes sont véritablement à l'écoute et bienveillants."</p>
+                        <p class="testimonial-author">— Véronique M.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Les consultations m'ont aidé à clarifier mes pensées et à transformer mon rapport aux émotions. Une véritable renaissance mentale."</p>
+                        <p class="testimonial-author">— Jacques D.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Un espace magnifique et une équipe exceptionnelle. J'ai trouvé la paix intérieure que je cherchais depuis longtemps."</p>
+                        <p class="testimonial-author">— Sophie L.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <h2>Réservez Votre Consultation</h2>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <form id="bookingForm">
+                        <input type="text" class="form-control" placeholder="Votre Nom Complet" required>
+                        <input type="email" class="form-control" placeholder="Votre Email" required>
+                        <input type="tel" class="form-control" placeholder="Votre Téléphone" required>
+                        <select class="form-control" required>
+                            <option value="">Sélectionnez un espace</option>
+                            <option value="ressourcement">Salle de Ressourcement</option>
+                            <option value="silence">Paillotes de Silence</option>
+                            <option value="sable">Bac à Sable</option>
+                            <option value="emotions">Salle des Émotions</option>
+                        </select>
+                        <input type="datetime-local" class="form-control" required>
+                        <textarea class="form-control" rows="4" placeholder="Décrivez brièvement votre besoin thérapeutique..."></textarea>
+                        <button type="submit" class="btn-premium w-100">CONFIRMER MA CONSULTATION</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="footer-section">
+                        <h3>MAISON THULA</h3>
+                        <p>Centre de consultation mentale dédié à votre bien-être émotionnel et votre transformation personnelle.</p>
+                        <div class="social-links">
+                            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-section">
+                        <h3>Services</h3>
+                        <a href="#services">Nos Espaces</a><br>
+                        <a href="#services">Consultations Privées</a><br>
+                        <a href="#services">Séances Thérapeutiques</a><br>
+                        <a href="#services">Programmes Personnalisés</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-section">
+                        <h3>À Propos</h3>
+                        <a href="#about">Notre Mission</a><br>
+                        <a href="#about">Notre Équipe</a><br>
+                        <a href="#">Certifications</a><br>
+                        <a href="#">Conditions d'Utilisation</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <p>📍ABIDJAN COCODY ATTOBAN FACE DIRECTION GÉNÉRALE DES MARCHÉS PUBLICS </p>
+                        <p>📞 Téléphone: <a href="+ 225 05 65 45 27 68">+ 225 05 65 45 27 68</a></p>
+                        <p>✉️ Email: info@maison-thula.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MAISON THULA - Centre de Consultation Mentale. Tous les droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTopBtn"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // Initialize Hero Slider
+        const heroSlider = new Swiper('#heroSlider', {
+            loop: true,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            speed: 1000,
+        });
+
+        // Initialize Gallery Slider
+        const gallerySlider = new Swiper('#gallerySlider', {
+            loop: true,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            slidesPerView: 1,
+            spaceBetween: 20,
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+            },
+            autoplay: { delay: 3000, disableOnInteraction: false },
+            speed: 800,
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate hero content
+        gsap.from('.hero-content', {
+            opacity: 0,
+            x: -50,
+            duration: 1,
+            delay: 0.3,
+        });
+
+        gsap.from('.hero-tagline', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            delay: 0.6,
+        });
+
+        // Animate service cards on scroll
+        gsap.utils.toArray('.service-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                delay: i * 0.1,
+            });
+        });
+
+        // Animate rating cards on scroll
+        gsap.utils.toArray('.rating-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                delay: i * 0.1,
+            });
+        });
+
+        // Animate testimonial cards on scroll
+        gsap.utils.toArray('.testimonial-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                },
+                opacity: 0,
+                x: i % 2 === 0 ? -50 : 50,
+                duration: 0.8,
+            });
+        });
+
+        // Scroll to Top Button
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('active');
+            } else {
+                scrollBtn.classList.remove('active');
+            }
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Form Submission
+        document.getElementById('bookingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Merci pour votre demande de consultation! Nous vous contacterons dans les 24 heures.');
+            e.target.reset();
+        });
+    </script>
+</body>
+
+</html>
